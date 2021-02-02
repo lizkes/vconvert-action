@@ -16,11 +16,13 @@ jobs:
       -
         name: Checkout
         uses: actions/checkout@v2
-      - name: Run Dockerfile
-        run: |
-          docker build -t vconvert --build-arg CLIENT_ID={{ secrets.CLIENT_ID }} --build-arg CLIENT_SECRET={{ secrets.CLIENT_SECRET }} \
-          --build-arg TOKEN='{{ secrets.TOKEN }}' --build-arg TEAM_DRIVE={{ secrets.TEAM_DRIVE }} --build-arg ROOT_FOLDER={{ secrets.ROOT_FOLDER }} .
-          docker run -it  -e "log_level=debug" -e "remove_origin=false" -e "mode=both" -e "sleep_time=3600" -e "threads=2" \
-          -e "format=mp4" -e "vc=h265" -e "ac=aac" -e "bit=10" -e "fb_api_key={{ secrets.FB_API_KEY }}" \
-          -e "fb_project_id={{ secrets.FB_PROJECT_ID }}" -e "fb_db_url={{ secrets.FB_DB_URL }}" -e "fb_email={{ secrets.FB_EMAIL }}" \
-          -e "fb_password={{ secrets.FB_PASSWORD }}" -v /mnt/gdrive:/vconvert vconvert
+      - name: Build
+        run: docker build -t vconvert \
+            --build-arg CLIENT_ID=${{ secrets.CLIENT_ID }} --build-arg CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} \
+            --build-arg TOKEN='${{ secrets.TOKEN }}' --build-arg TEAM_DRIVE=${{ secrets.TEAM_DRIVE }} \
+            --build-arg ROOT_FOLDER=${{ secrets.ROOT_FOLDER }} .
+      - name: RUN
+        run: docker run -it  -e "log_level=debug" -e "remove_origin=false" -e "mode=both" -e "sleep_time=3600" -e "threads=2" \
+            -e "format=mp4" -e "vc=h265" -e "ac=aac" -e "bit=10" -e "fb_api_key=${{ secrets.FB_API_KEY }}" \
+            -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" -e "fb_db_url=${{ secrets.FB_DB_URL }}" -e "fb_email=${{ secrets.FB_EMAIL }}" \
+            -e "fb_password=${{ secrets.FB_PASSWORD }}" -v /mnt/gdrive:/vconvert vconvert
