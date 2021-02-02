@@ -1,6 +1,11 @@
 FROM lizkes/vconvert:latest
 
 SHELL ["/bin/bash", "-c"]
+ARG CLIENT_ID=a
+ARG CLIENT_SECRET=a
+ARG TOKEN=a
+ARG TEAM_DRIVE=a
+ARG ROOT_FOLDER=a
 COPY rclone.conf ~/.config/rclone/rclone.conf
 RUN sed 's@CLIENT_ID@'"$CLIENT_ID"'@' ~/.config/rclone/rclone.conf && sed 's@CLIENT_SECRET@'"$CLIENT_SECRET"'@' ~/.config/rclone/rclone.conf \
     && sed 's@TOKEN@'"$TOKEN"'@' ~/.config/rclone/rclone.conf && sed 's@TEAM_DRIVE@'"$TEAM_DRIVE"'@' ~/.config/rclone/rclone.conf \
