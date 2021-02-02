@@ -1,0 +1,94 @@
+name: 'vconvert-action'
+description: 'convert google drive video by vconvert'
+inputs:
+  client_id:
+    description: google api client_id
+    required: true
+  client_secret:
+    description: google api client_secret
+    required: true
+  token:
+    description: google api token
+    required: true
+  team_drive:
+    description: google api team_drive
+    required: true
+  mode:
+    description: vconvert mode env
+    required: false
+    default: both
+  sleep_time:
+    description: vconvert sleep_time env
+    required: false
+    default: "3600"
+  remove_origin:
+    description: vconvert remove_origin env
+    required: false
+    default: "false"
+  input_dir:
+    description: vconvert input_dir env
+    required: false
+    default: "/mnt/gdrive"
+  temp_dir:
+    description: vconvert temp_dir env
+    required: false
+    default: "/mnt/gdrive"
+  format:
+    description: vconvert format env
+    required: false
+    default: "webm"
+  vc:
+    description: vconvert vc env
+    required: false
+    default: "h265"
+  ac:
+    description: vconvert ac env
+    required: false
+    default: "aac"
+  bit:
+    description: vconvert bit env
+    required: false
+    default: "10"
+  log_level:
+    description: vconvert log_level env
+    required: false
+    default: "debug"
+  fb_api_key:
+    description: vconvert fb_api_key env
+    required: true
+  fb_project_id:
+    description: vconvert fb_project_id env
+    required: true
+  fb_db_url:
+    description: vconvert fb_db_url env
+    required: true
+  fb_email:
+    description: vconvert fb_email env
+    required: true
+  fb_password:
+    description: vconvert fb_password env
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    threads: "2"
+    client_id: ${{ inputs.client_id }}
+    client_secret: ${{ inputs.client_secret }}
+    token: ${{ inputs.token }}
+    team_drive: ${{ inputs.team_drive }}
+    mode: ${{ inputs.mode }}
+    sleep_time: ${{ inputs.sleep_time }}
+    remove_origin: ${{ inputs.remove_origin }}
+    input_dir: ${{ inputs.input_dir }}
+    temp_dir: ${{ inputs.temp_dir }}
+    format: ${{ inputs.format }}
+    vc: ${{ inputs.vc }}
+    ac: ${{ inputs.ac }}
+    bit: ${{ inputs.bit }}
+    log_level: ${{ inputs.log_level }}
+    fb_api_key: ${{ inputs.fb_api_key }}
+    fb_project_id: ${{ inputs.fb_project_id }}
+    fb_db_url: ${{ inputs.fb_db_url }}
+    fb_email: ${{ inputs.fb_email }}
+    fb_password: ${{ inputs.fb_password }}
