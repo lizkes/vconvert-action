@@ -4,17 +4,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  convert1:
+  convert:
     runs-on: ubuntu-20.04
     environment: vconvert
+    strategy:
+      matrix:
+        sleep_time: ["0s", "30s", "60s", "90s", "120s", "150s", "180s", "210s", "240s", "270s", "300s", "330s", "360s", "390s", "420s", "450s", "480s", "510s", "540s", "570s"]
+      fail-fast: false
     steps:
       - uses: docker-practice/actions-setup-docker@master
         with:
           docker_channel: nightly
           # this value please see https://github.com/AkihiroSuda/moby-snapshot/releases
           docker_nightly_version: snapshot-20201109
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v2
       - name: Build
         run: |
@@ -22,6 +25,10 @@ jobs:
           --build-arg CLIENT_ID=${{ secrets.CLIENT_ID }} --build-arg CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} \
           --build-arg TOKEN='${{ secrets.TOKEN }}' --build-arg TEAM_DRIVE=${{ secrets.TEAM_DRIVE }} \
           --build-arg ROOT_FOLDER=${{ secrets.ROOT_FOLDER }} .
+      - name: Sleep
+        uses: jakejarvis/wait-action@master
+        with:
+          time: ${{ matrix.sleep_time }}
       - name: RUN
         run: |
           docker run --rm --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined \
