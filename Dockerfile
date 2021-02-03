@@ -1,5 +1,10 @@
 FROM lizkes/vconvert:latest
 
+ARG CLIENT_ID=a
+ARG CLIENT_SECRET=a
+ARG TOKEN=a
+ARG TEAM_DRIVE=a
+ARG ROOT_FOLDER=a
 RUN apt-get install -y fuse unzip curl && curl https://rclone.org/install.sh | bash
 COPY ./rclone.conf /root/.config/rclone/rclone.conf
 RUN sed -i 's@CLIENT_ID@'"$CLIENT_ID"'@' /root/.config/rclone/rclone.conf && sed -i 's@CLIENT_SECRET@'"$CLIENT_SECRET"'@' /root/.config/rclone/rclone.conf \
