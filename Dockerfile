@@ -12,4 +12,5 @@ RUN sed -i 's@CLIENT_ID@'"$CLIENT_ID"'@' /root/.config/rclone/rclone.conf && sed
     && sed -i 's@ROOT_FOLDER@'"$ROOT_FOLDER"'@' /root/.config/rclone/rclone.conf
 RUN apt-get install -y fuse unzip curl && curl https://rclone.org/install.sh | bash \
     && mkdir -p /mnt/gdrive && rclone mount gdrive:/ /mnt/gdrive --umask 0000 --default-permissions --allow-other --allow-non-empty \
-    --transfers 2 --buffer-size 512M --drive-chunk-size 32M --low-level-retries 200 --drive-acknowledge-abuse --daemon
+    --transfers 2 --vfs-cache-mode full --vfs-read-chunk-size-limit 2048M --vfs-cache-max-size 4096M --buffer-size 4096M \
+    --drive-chunk-size 2048M --low-level-retries 200 --drive-acknowledge-abuse --daemon
