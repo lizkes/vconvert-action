@@ -31,9 +31,9 @@ jobs:
       - name: RUN
         run: |
           docker run --rm --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined \
-          -e "log_level=${{ secrets.LOG_LEVEL }}" -e "remove_origin=${{ secrets.RM_ORIGIN }}" -e "mode=${{ secrets.MODE }}" \
-          -e "threads=2" -e "format=${{ secrets.FORMAT }}" -e "vc=${{ secrets.VC_FORMAT }}" -e "ac=${{ secrets.AC_FORMAT }}" \
-          -e "bit=${{ secrets.VC_BIT }}" -e "crf=${{ secrets.VC_CRF }}" -e "force_convert=${{ secrets.FORCE_CONVERT }}" \
+          -e "log_level=${{ secrets.LOG_LEVEL }}" -e "remove_origin=${{ secrets.REMOVE_ORIGIN }}" -e "mode=${{ secrets.MODE }}" \
+          -e "threads=2" -e "format=${{ secrets.FORMAT }}" -e "vc=${{ secrets.VC }}" -e "ac=${{ secrets.AC }}" \
+          -e "bit=${{ secrets.BIT }}" -e "crf=${{ secrets.CRF }}" -e "force_convert=${{ secrets.FORCE_CONVERT }}" \
           -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" -e "fb_db_url=${{ secrets.FB_DB_URL }}" \
           -e "fb_email=${{ secrets.FB_EMAIL }}" -e "fb_password=${{ secrets.FB_PASSWORD }}" -e "sleep_time=${{ secrets.SLEEP_TIME }}" \
           vconvert
