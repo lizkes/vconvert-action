@@ -9,7 +9,7 @@ jobs:
     environment: vconvert
     strategy:
       matrix:
-        sleep_time: ["10s", "20s", "30s", "40s", "50s", "60s", "70s", "80s", "90s", "100s", "110s", "120s", "130s", "140s", "150s", "160s", "170s", "180s", "190s", 200s"]
+        sleep_time: ["10s", "20s", "30s", "40s", "50s", "60s", "70s", "80s", "90s", "100s", "110s", "120s", "130s", "140s", "150s", "160s", "170s", "180s", "190s", "200s"]
       fail-fast: false
     steps:
       - name: Sleep
