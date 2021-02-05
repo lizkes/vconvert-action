@@ -35,4 +35,4 @@ jobs:
           -e "threads=2" -e "format=${{ secrets.FORMAT }}" -e "vc=${{ secrets.VC }}" -e "ac=${{ secrets.AC }}" \
           -e "crf=${{ secrets.CRF }}" -e "force_convert=${{ secrets.FORCE_CONVERT }}" -e "sleep_time=${{ secrets.SLEEP_TIME }}" \
           -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" -e "fb_db_url=${{ secrets.FB_DB_URL }}" \
-          -e "fb_email=${{ secrets.FB_EMAIL }}" -e "fb_password=${{ secrets.FB_PASSWORD }}" vconvert
+          -e "fb_email=${{ secrets.FB_EMAIL }}" -e "fb_password=${{ secrets.FB_PASSWORD }}" -e "enable_file_log=false" vconvert

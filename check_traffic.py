@@ -18,7 +18,7 @@ def transmissionrate(dev, direction, timestep):
 
 byterate = transmissionrate("eth0", "tx", 30) / 30
 print(f"tx byterate: {byterate}")
-while byterate > 128 * 1024:  # 128KB/s
+while byterate > 32 * 1024:  # 32KB/s
     byterate = transmissionrate("eth0", "tx", 30) / 30
     print(f"tx byterate: {byterate}")
 print("tx traffic is low, Task is Done, Exit")
