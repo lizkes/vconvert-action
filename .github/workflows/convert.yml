@@ -3,7 +3,7 @@ name: vconvert
 on:
   workflow_dispatch:
   schedule:
-  - cron:  '19,49 * * * *'
+  - cron:  '29 * * * *'
 
 jobs:
   convert:
@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Sleep
-        run: sleep $[${{ matrix.sleep_time }} - 1]
+        run: sleep $[(${{ matrix.sleep_time }} - 1) * 10]
       - name: Install docker
         uses: docker-practice/actions-setup-docker@master
         with:
