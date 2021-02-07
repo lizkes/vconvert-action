@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
     steps:
       - name: Sleep
-        run: sleep ${{ matrix.sleep_time }}
+        run: sleep $[(${{ matrix.sleep_time }} - 1) * 10]
       - name: Install docker
         uses: docker-practice/actions-setup-docker@master
         with:
