@@ -2,8 +2,8 @@ name: vconvert
 
 on:
   workflow_dispatch:
-  schedule:
-  - cron:  '29 * * * *'
+  #schedule:
+  #- cron:  '29 * * * *'
 
 jobs:
   convert:
