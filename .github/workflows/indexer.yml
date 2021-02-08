@@ -1,0 +1,34 @@
+name: indexer
+
+on:
+  workflow_dispatch:
+  #schedule:
+  #- cron:  '02 20 * * *'
+
+jobs:
+  indexer:
+    runs-on: ubuntu-20.04
+    environment: vconvert
+    steps:
+      - name: Install docker
+        uses: docker-practice/actions-setup-docker@master
+        with:
+          docker_channel: stable
+          docker_version: "20.10"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          docker build -t vconvert \
+          --build-arg CLIENT_ID=${{ secrets.CLIENT_ID }} --build-arg CLIENT_SECRET=${{ secrets.CLIENT_SECRET }} \
+          --build-arg TOKEN='${{ secrets.TOKEN }}' --build-arg TEAM_DRIVE=${{ secrets.TEAM_DRIVE }} \
+          --build-arg ROOT_FOLDER=${{ secrets.ROOT_FOLDER }} .
+      - name: RUN
+        run: |
+          docker run --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined \
+          -e "log_level=${{ secrets.LOG_LEVEL }}" -e "remove_origin=${{ secrets.REMOVE_ORIGIN }}" -e "mode=${{ secrets.MODE }}" \
+          -e "format=${{ secrets.FORMAT }}" -e "vc=${{ secrets.VC }}" -e "ac=${{ secrets.AC }}" -e "preset=${{ secrets.PRESET }}" \
+          -e "crf=${{ secrets.CRF }}" -e "force_convert=${{ secrets.FORCE_CONVERT }}" -e "sleep_time=${{ secrets.SLEEP_TIME }}" \
+          -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" -e "fb_db_url=${{ secrets.FB_DB_URL }}" \
+          -e "fb_email=${{ secrets.FB_EMAIL }}" -e "fb_password=${{ secrets.FB_PASSWORD }}" -e "enable_file_log=false" \
+          -e "threads=2" -e "storage=firebase" -e "role=indexer" vconvert
