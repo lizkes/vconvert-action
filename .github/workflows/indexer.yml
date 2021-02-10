@@ -26,9 +26,9 @@ jobs:
       - name: RUN
         run: |
           docker run --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined \
-          -e "log_level=${{ secrets.LOG_LEVEL }}" -e "remove_origin=${{ secrets.REMOVE_ORIGIN }}" -e "mode=${{ secrets.MODE }}" \
-          -e "format=${{ secrets.FORMAT }}" -e "vc=${{ secrets.VC }}" -e "ac=${{ secrets.AC }}" -e "preset=${{ secrets.PRESET }}" \
-          -e "crf=${{ secrets.CRF }}" -e "force_convert=${{ secrets.FORCE_CONVERT }}" -e "sleep_time=${{ secrets.SLEEP_TIME }}" \
-          -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" -e "fb_db_url=${{ secrets.FB_DB_URL }}" \
-          -e "fb_email=${{ secrets.FB_EMAIL }}" -e "fb_password=${{ secrets.FB_PASSWORD }}" -e "enable_file_log=false" \
-          -e "threads=2" -e "storage=firebase" -e "role=indexer" vconvert
+          -e "log_level=debug" -e "remove_origin=false" -e "mode=both" -e "storage=firebase" -e "role=indexer" \
+          -e "format=mkv" -e "vc=h264" -e "ac=aac" -e "preset=veryfast" -e "threads=2" -e "crf=20" \
+          -e "force_convert=false" -e "sleep_time=21600" -e "enable_file_log=false" -e "max_do_nothing=100" \
+          -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" \
+          -e "fb_db_url=${{ secrets.FB_DB_URL }}" -e "fb_email=${{ secrets.FB_EMAIL }}" \
+          -e "fb_password=${{ secrets.FB_PASSWORD }}" vconvert
