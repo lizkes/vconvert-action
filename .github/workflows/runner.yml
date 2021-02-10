@@ -11,7 +11,7 @@ jobs:
     environment: vconvert
     strategy:
       matrix:
-        sleep_time: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+        sleep_time: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
       fail-fast: false
     steps:
       - name: Sleep
@@ -34,7 +34,7 @@ jobs:
           docker run --device /dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined \
           -e "log_level=debug" -e "remove_origin=false" -e "mode=both" -e "storage=firebase" -e "role=runner" \
           -e "format=mkv" -e "vc=h264" -e "ac=aac" -e "preset=veryfast" -e "threads=2" -e "crf=20" \
-          -e "force_convert=false" -e "sleep_time=21600" -e "enable_file_log=false" -e "max_do_nothing=100" \
+          -e "force_convert=false" -e "sleep_time=21600" -e "enable_file_log=false" -e "max_do_nothing=500" \
           -e "fb_api_key=${{ secrets.FB_API_KEY }}" -e "fb_project_id=${{ secrets.FB_PROJECT_ID }}" \
           -e "fb_db_url=${{ secrets.FB_DB_URL }}" -e "fb_email=${{ secrets.FB_EMAIL }}" \
           -e "fb_password=${{ secrets.FB_PASSWORD }}" vconvert
