@@ -2,8 +2,8 @@ name: runner
 
 on:
   workflow_dispatch:
-  #schedule:
-  #- cron:  '14,44 * * * *'
+  schedule:
+  - cron:  '44 * * * *'
 
 jobs:
   runner:
